@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class AVL<Key extends Comparable<Key>>
 {
@@ -480,6 +483,46 @@ public class AVL<Key extends Comparable<Key>>
 		}
 		return s;
 	}
+	
+	//Returns a string with the contents of the tree, ordered by level
+	public String toString()
+	{
+		String s = "";
+		
+		Queue<Node<Key>> queue = new LinkedList<>();
+		queue.add(root);
+		
+		for(int i = 0; !queue.isEmpty(); i++)
+		{	
+			s += "\nLevel " + i +": ";
+			
+			int numNodes = queue.size();
+			
+			//add all nodes on this level to the string, and enqueue all of their children
+			for(; numNodes > 0; numNodes--)
+			{
+				//add this node to the string
+				Node<Key> node = queue.remove();
+				s += node.key + " ";
+				
+				//Add the node's children to the queue
+				Node<Key> leftChild = node.leftChild;
+				Node<Key> rightChild = node.rightChild;
+				if(leftChild != null)
+				{
+					queue.add(leftChild);
+				}
+				if(rightChild != null)
+				{
+					queue.add(rightChild);
+				}
+			}
+		}
+		return s;
+		
+	}//end toString
+	
+	
 	
 	private class Node<Key extends Comparable<Key>>
 	{

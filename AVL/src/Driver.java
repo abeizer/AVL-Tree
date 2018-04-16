@@ -16,10 +16,7 @@ public class Driver {
 		avl.insert(100);
 		avl.inorder();
 
-
-		avl.delete(50);	avl.inorder();
-		avl.delete(40);	avl.inorder();
-		avl.delete(30);	avl.inorder();
+		System.out.println(avl.toString());
 
 	}
 
